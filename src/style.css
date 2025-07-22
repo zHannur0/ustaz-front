@@ -7,5 +7,13 @@
 
     --color-primary: #EEF4FF;
 
-    --color-success: #00BCD4;
+    --color-success: #44BF78;
+    --color-error: #F5443A;
+    --color-warning: #FB9130;
+    --color-link: #2E79EA;
+
+    --color-high: #333333;
+    --color-medium: #333333;
+    --color-low: #333333;
+    --color-disabledGray: #333333;
 }

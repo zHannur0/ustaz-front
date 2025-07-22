@@ -19,7 +19,7 @@
 </script>
 
 <template>
-  <div class="w-full max-w-[300px] bg-gray-200 h-full flex flex-col items-center gap-3 p-4 rounded-2xl min-h-[90vh]">
+  <div class="w-full max-w-[300px] bg-primary h-full flex flex-col items-center gap-3 p-4 rounded-2xl min-h-[70vh] shadow-md font-medium">
     <router-link v-for="nav in sideBarNavs" :key="nav.id" :to="nav.link" class="flex items-center w-full bg-white py-2 px-3 rounded-xl hover:text-default">
       {{ nav.title }}
     </router-link>
