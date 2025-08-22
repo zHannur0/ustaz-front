@@ -9,5 +9,4 @@ export class AuthService {
     public static async verifyOtp(email: string, code: string ) {
         await Api.post("api/auth/verify-otp/", {email, code});
     }
-
 }

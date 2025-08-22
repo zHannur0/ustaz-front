@@ -11,6 +11,14 @@ const router = createRouter({
                 layout: 'MainLayout',
             },
             component:  () => import("@/modules/home/Home.vue"),
+        },
+        {
+            path: '/qmj',
+            name: 'qmj',
+            meta: {
+                layout: 'MainLayout',
+            },
+            component:  () => import("@/modules/qmj/QmjView.vue"),
         }
     ]
 })

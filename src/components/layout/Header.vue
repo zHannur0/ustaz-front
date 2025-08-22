@@ -14,7 +14,7 @@ const navs = [
   {
     id: "nav-2",
     title: "Дайын ҚМЖ",
-    link: "/qmg"
+    link: "/qmj"
   },
   {
     id: "nav-3",

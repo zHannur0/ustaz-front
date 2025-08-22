@@ -6,7 +6,6 @@ import { useAuthStore } from '@/stores/authStore'
 import Modal from "@/components/modals/Modal.vue"
 import { computed, ref, watch } from "vue"
 
-// Types
 interface Props {
   show: boolean
 }
@@ -16,21 +15,17 @@ interface Emits {
   (e: 'success'): void
 }
 
-// Component setup
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
 
-// Composables
 const { requestOtp, verifyOtp, isLoading: isOtpLoading } = useOtp()
 const authStore = useAuthStore()
 
-// Reactive state
 const step = ref<1 | 2>(1)
 const isSubmitting = ref(false)
 const countdown = ref(0)
 const countdownTimer = ref<NodeJS.Timeout | null>(null)
 
-// Validation schema
 const validationSchema = computed(() => {
   const baseSchema = {
     email: yup
@@ -52,7 +47,6 @@ const validationSchema = computed(() => {
   return yup.object(baseSchema)
 })
 
-// Form setup
 const { handleSubmit, errors, resetForm, setFieldError } = useForm({
   validationSchema,
   initialValues: { email: '', code: '' }
@@ -61,7 +55,6 @@ const { handleSubmit, errors, resetForm, setFieldError } = useForm({
 const { value: email, errorMessage: emailError } = useField<string>('email')
 const { value: code, errorMessage: codeError } = useField<string>('code')
 
-// Methods
 const startCountdown = () => {
   countdown.value = 60
   countdownTimer.value = setInterval(() => {
@@ -157,18 +150,17 @@ const goBack = () => {
   code.value = ''
 }
 
-// Watch for modal close to cleanup
 watch(() => props.show, (newVal) => {
   if (!newVal) {
     handleClose()
   }
 })
+
 </script>
 
 <template>
   <Modal :show="show" @close="handleClose">
     <div class="w-full max-w-md mx-auto">
-      <!-- Header -->
       <div class="text-center mb-8">
         <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -186,7 +178,6 @@ watch(() => props.show, (newVal) => {
         </p>
       </div>
 
-      <!-- Google Auth (only on step 1) -->
       <div v-if="step === 1" class="mb-6">
         <button
             type="button"
@@ -202,7 +193,6 @@ watch(() => props.show, (newVal) => {
           Google арқылы кіру
         </button>
 
-        <!-- Divider -->
         <div class="relative my-6">
           <div class="absolute inset-0 flex items-center">
             <div class="w-full border-t border-gray-200"></div>
@@ -213,7 +203,6 @@ watch(() => props.show, (newVal) => {
         </div>
       </div>
 
-      <!-- Back button for step 2 -->
       <div v-if="step === 2" class="mb-4">
         <button
             type="button"
@@ -227,9 +216,7 @@ watch(() => props.show, (newVal) => {
         </button>
       </div>
 
-      <!-- Form -->
       <form @submit.prevent="onSubmit" class="space-y-5">
-        <!-- Email Input -->
         <div>
           <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
             Электрондық пошта
@@ -262,7 +249,6 @@ watch(() => props.show, (newVal) => {
           </div>
         </div>
 
-        <!-- Code Input (Step 2) -->
         <div v-if="step === 2" class="space-y-3">
           <label for="code" class="block text-sm font-semibold text-gray-700">
             Растау коды
@@ -287,7 +273,6 @@ watch(() => props.show, (newVal) => {
             {{ codeError }}
           </div>
 
-          <!-- Resend Code -->
           <div class="text-center">
             <button
                 type="button"
@@ -306,7 +291,6 @@ watch(() => props.show, (newVal) => {
           </div>
         </div>
 
-        <!-- Submit Button -->
         <button
             type="submit"
             :disabled="isSubmitting || isOtpLoading"
@@ -328,7 +312,6 @@ watch(() => props.show, (newVal) => {
         </button>
       </form>
 
-      <!-- Footer -->
       <div class="mt-6 text-center text-xs text-gray-500">
         Жүйеге кіру арқылы сіз біздің
         <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">қызмет шарттарымызбен</a>
@@ -349,7 +332,6 @@ input:focus {
   transition-duration: 150ms;
 }
 
-/* Enhanced button hover effects */
 button:hover:not(:disabled) {
   transform: translateY(-1px);
 }
