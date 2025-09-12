@@ -11,7 +11,10 @@ import SideBar from "@/components/layout/SideBar.vue";
       <Header/>
       <main class="flex w-full h-full mt-[20px]">
         <SideBar/>
-        <slot/>
+        <div class="w-full px-4">
+          <slot/>
+        </div>
+
       </main>
     </Wrapper>
   </div>
